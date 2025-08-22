@@ -1,71 +1,124 @@
+"use client";
 import Link from "next/link";
-import React from "react";
-import foodies from "../../public/Foodies.png"
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+
 
 export default function Navbar() {
-  const links = (
-    <>
-      <li>
-        <Link href="/">Home</Link>
-      </li>
-      <li>
-        <Link href="/products">Products</Link>
-      </li>
-      <li>
-        <Link href="/dashboard">Dashboard</Link>
-      </li>
-    </>
-  );
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const pathname = usePathname();
+
+  const links = [
+    { name: "Home", href: "/" },
+    { name: "Products", href: "/products" },
+    { name: "Dashboard", href: "/dashboard" },
+  ];
+
   return (
-    <div className="navbar bg-base-100 shadow-sm px-12 sticky top-0 z-50">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
-            </svg>
+    <nav className="bg-primary text-white shadow-md sticky w-full z-50 top-0">
+      <div className="max-w-7xl mx-auto px-5 lg:px-0">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <Link href="/">
+              <span className="text-2xl font-bold hover:text-accent transition">
+                Foodies
+              </span>
+            </Link>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+
+          {/* Desktop Menu */}
+          <div className="hidden lg:flex space-x-8 items-center">
+            {links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`font-medium transition ${
+                  pathname === link.href
+                    ? "text-accent underline underline-offset-4"
+                    : "text-white hover:text-accent"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Link
+              href="/login"
+              className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+            >
+              Login
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden flex items-center">
+            <button
+              onClick={() => setMobileMenu(!mobileMenu)}
+              className="focus:outline-none"
+            >
+              {mobileMenu ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenu && (
+        <div className="lg:hidden bg-primary px-5 pt-2 pb-4 space-y-2">
+          {links.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={`block font-medium py-2 transition ${
+                pathname === link.href
+                  ? "text-accent underline underline-offset-4"
+                  : "text-white hover:text-accent"
+              }`}
+              onClick={() => setMobileMenu(false)}
+            >
+              {link.name}
+            </Link>
+          ))}
+          <Link
+            href="/login"
+            className="block w-full text-center px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+            onClick={() => setMobileMenu(false)}
           >
-            {links}
-          </ul>
-        </div>
-        <div>
-            <Image width={100} height={100} src={foodies} alt="Foodies" />
-        </div>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
-      </div>
-      <div className="navbar-end">
-        <Link
-          href="/Login"
-          className="relative inline-flex items-center justify-start px-6 py-3 overflow-hidden font-medium transition-all bg-red-500 rounded-xl group"
-        >
-          <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-red-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-            <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-          </span>
-          <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full translate-y-full bg-red-600 rounded-2xl group-hover:mb-12 group-hover:translate-x-0"></span>
-          <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
             Login
-          </span>
-        </Link>
-      </div>
-    </div>
+          </Link>
+        </div>
+      )}
+    </nav>
   );
 }

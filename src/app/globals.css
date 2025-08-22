@@ -2,3 +2,12 @@
 @plugin "daisyui" {
   themes: light --default;
 }
+
+:root {
+  --color-primary: #d14949;    /* Tomato red */
+  --color-secondary: #FBBF24;  /* Amber yellow */
+  --color-accent: #10B981;     /* Green */
+  --color-bg: #FFF7ED;         /* Light cream */
+  --color-text: #111827;       /* Dark gray */
+  --color-text-secondary: #374151; /* Medium gray */
+}

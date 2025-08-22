@@ -26,7 +26,7 @@ export default async function ServiceDetails({ params }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 my-16">
+    <div className="max-w-4xl mx-auto p-6 my-20">
       <div className="bg-white shadow-lg rounded-2xl overflow-hidden">
         {/* Product Image */}
         <div className="relative w-full h-80">
