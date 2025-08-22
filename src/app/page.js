@@ -1,7 +1,12 @@
 import Image from "next/image";
+import Products from "./products/page";
+
+
 
 export default function Home() {
   return (
-   <h1>Hello world</h1>
+   <div>
+    <Products></Products>
+   </div>
   );
 }
