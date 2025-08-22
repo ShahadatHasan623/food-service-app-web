@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "66c7f1cde1a1f0001",
+    "product_id": "F01",
+    "name": "Margherita Pizza",
+    "img": "https://i.ibb.co.com/k2GNm438/pexels-fariphotography-905847.jpg",
+    "price": "8.99",
+    "description": "A classic Italian pizza topped with fresh mozzarella cheese, ripe tomatoes, and aromatic basil leaves, baked to perfection on a thin crust."
+  },
+  {
+    "_id": "66c7f1cde1a1f0002",
+    "product_id": "F02",
+    "name": "Cheeseburger",
+    "img": "https://i.ibb.co.com/d4jmxGn4/pexels-valeriya-1639557.jpg",
+    "price": "6.50",
+    "description": "A juicy grilled beef patty layered with melted cheddar cheese, fresh lettuce, tomatoes, and tangy pickles, served in a soft toasted bun."
+  },
+  {
+    "_id": "66c7f1cde1a1f0003",
+    "product_id": "F03",
+    "name": "Pasta Alfredo",
+    "img": "https://i.ibb.co.com/1tccws6t/pexels-enginakyurt-1437267.jpg",
+    "price": "10.00",
+    "description": "Delicious creamy Alfredo pasta cooked with tender grilled chicken, rich parmesan cheese, and a smooth buttery sauce."
+  },
+  {
+    "_id": "66c7f1cde1a1f0004",
+    "product_id": "F04",
+    "name": "Chicken Biryani",
+    "img": "https://i.ibb.co.com/DHNsWbk1/pexels-gourav-sarkar-462560178-16020573.jpg",
+    "price": "7.99",
+    "description": "A flavorful rice dish made with aromatic basmati rice, marinated chicken, and a blend of traditional spices and herbs."
+  },
+  {
+    "_id": "66c7f1cde1a1f0005",
+    "product_id": "F05",
+    "name": "Grilled Salmon",
+    "img": "https://i.ibb.co.com/Q3sQkBkJ/pexels-horizon-content-2100060-3763847.jpg",
+    "price": "15.00",
+    "description": "Fresh salmon fillet grilled to perfection and served with a tangy lemon butter sauce and seasonal vegetables."
+  },
+  {
+    "_id": "66c7f1cde1a1f0006",
+    "product_id": "F06",
+    "name": "Chocolate Cake",
+    "img": "https://i.ibb.co.com/YFbY4sBd/pexels-dima-valkov-1186343-3734026.jpg",
+    "price": "4.50",
+    "description": "A rich and moist chocolate cake layered with creamy chocolate frosting, perfect for satisfying your sweet cravings."
+  }
+]
