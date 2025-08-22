@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 
 export default async function Products() {
-  const productCollection = dbConnect(collectionNameObj.productsCollections);
+  const productCollection =await dbConnect(collectionNameObj.productsCollections);
   const data = await productCollection.find({}).toArray();
 
   return (
