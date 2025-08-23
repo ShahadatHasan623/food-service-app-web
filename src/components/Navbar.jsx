@@ -1,4 +1,5 @@
 "use client";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -6,6 +7,9 @@ import { useState } from "react";
 export default function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const pathname = usePathname();
+
+  const { data: session, status } = useSession();
+  console.log(session);
 
   const links = [
     { name: "Home", href: "/" },
@@ -43,19 +47,32 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <Link
-                href="/login"
-                className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
-              >
-                Login
-              </Link>
+              {status == "authenticated" ? (
+                <>
+                  <button
+                    onClick={() => signOut()}
+                    className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+                  >
+                    Singout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+                  >
+                    Login
+                  </Link>
 
-              <Link
-                href="/Register"
-                className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
-              >
-                Register
-              </Link>
+                  <Link
+                    href="/Register"
+                    className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -118,21 +135,32 @@ export default function Navbar() {
               </Link>
             ))}
 
-            <Link
-              href="/login"
-              className="block w-full text-center px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
-              onClick={() => setMobileMenu(false)}
-            >
-              Login
-            </Link>
+            {status == "authenticated" ? (
+              <>
+                <button
+                  onClick={() => signOut()}
+                  className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+                >
+                  Singout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+                >
+                  Login
+                </Link>
 
-            <Link
-              href="/Register"
-              className="block w-full text-center px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
-              onClick={() => setMobileMenu(false)}
-            >
-              Register
-            </Link>
+                <Link
+                  href="/Register"
+                  className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         )}
       </nav>
