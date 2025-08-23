@@ -1,22 +1,17 @@
 "use client";
 import { RegisterUser } from "@/app/actions/auth/RegisterUser";
+import SocialLogin from "@/app/login/SocialLogin";
 import React from "react";
 export default function RegisterForm() {
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const form =e.target;
-    const name =form.name.value;
-    const email =form.email.value;
-    const password =form.password.value;
-    const image =form.image.value;
-    // console.log({name,email,password})
-   await RegisterUser({name,email,password,image})
-   form.reset()
-  };
-
-  const handleGoogleSignUp = () => {
-    // handle google signup logic here
-    console.log("Google SignUp clicked");
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const image = form.image.value;
+    await RegisterUser({ name, email, password, image });
+    form.reset();
   };
 
   return (
@@ -75,22 +70,7 @@ export default function RegisterForm() {
 
       <div className="text-center my-4 text-gray-500">OR</div>
 
-      <button
-        onClick={handleGoogleSignUp}
-        className="w-full border-2 border-gray-300 py-2 rounded-lg flex items-center justify-center hover:bg-gray-100 transition"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 mr-2"
-          viewBox="0 0 48 48"
-        >
-          <path
-            fill="#4285F4"
-            d="M23.64 12.2c1.44 0 2.72.5 3.73 1.48l2.78-2.78C28.8 9.08 26.42 8 23.64 8 14.94 8 8 14.94 8 23.64c0 8.7 6.94 15.64 15.64 15.64 9 0 14.8-6.36 14.8-15.28 0-1.04-.1-1.84-.22-2.64H23.64v4.92h11.8c-.48 2.56-2.56 7.48-11.8 7.48-6.68 0-12.08-5.4-12.08-12.08s5.4-12.08 12.08-12.08z"
-          />
-        </svg>
-        Sign up with Google
-      </button>
+      <SocialLogin></SocialLogin>
     </div>
   );
 }

@@ -8,7 +8,7 @@ export default function Register() {
  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white shadow-xl rounded-2xl flex flex-col lg:flex-row max-w-4xl w-full">
+      <div className="bg-white my-20 shadow-xl rounded-2xl flex flex-col lg:flex-row max-w-4xl w-full">
         
         {/* Image Section */}
         <div className="lg:w-1/2 hidden lg:block relative rounded-l-2xl overflow-hidden">

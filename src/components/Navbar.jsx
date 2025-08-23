@@ -1,5 +1,6 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
+// import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -8,7 +9,7 @@ export default function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const pathname = usePathname();
 
-  const { data: session, status } = useSession();
+  const { data: session, status,user } = useSession();
   console.log(session);
 
   const links = [
@@ -49,6 +50,9 @@ export default function Navbar() {
 
               {status == "authenticated" ? (
                 <>
+                 {/* <li>
+                  <Image src={user.image} width={50} height={50} alt="image" ></Image>
+                 </li> */}
                   <button
                     onClick={() => signOut()}
                     className="px-5 py-2 border-2 border-white rounded-full font-semibold text-white hover:bg-accent hover:border-accent transition"

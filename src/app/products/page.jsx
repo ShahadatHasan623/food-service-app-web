@@ -2,7 +2,7 @@ import dbConnect, { collectionNameObj } from "@/lib/dbConnect";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-
+export const dynamic = "force-dynamic";
 export default async function Products() {
   const productCollection =await dbConnect(collectionNameObj.productsCollections);
   const data = await productCollection.find({}).toArray();
