@@ -1,6 +1,7 @@
 import dbConnect, { collectionNameObj } from "@/lib/dbConnect";
 import React from "react";
 import Image from "next/image";
+import { ObjectId } from "mongodb";
 
 export default async function ServiceDetails({ params }) {
   const { id } =await params; 
@@ -11,7 +12,7 @@ export default async function ServiceDetails({ params }) {
   );
 
   // MongoDB query
-  const query = { _id: id }; // string _id
+  const query = { _id: new ObjectId (id)  }; // string _id
   const singleData = await productCollection.findOne(query);
 
   // fallback if product not found

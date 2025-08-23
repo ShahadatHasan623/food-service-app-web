@@ -1,6 +1,7 @@
 "use server";
 
 import dbConnect, { collectionNameObj } from "@/lib/dbConnect";
+import bcrypt from "bcrypt";
 
 export const RegisterUser = async (payload) => {
   const { email, password, name } = payload;
@@ -12,19 +13,22 @@ export const RegisterUser = async (payload) => {
   const userCollection = await dbConnect(collectionNameObj.userCollections);
 
   const existingUser = await userCollection.findOne({ email });
-  if (existingUser) {
-    return { success: false, message: "User already exists" };
+  if (!existingUser) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    payload.password = hashedPassword;
+
+    const result = await userCollection.insertOne(payload);
+    const { acknowledged, insertedId } = result;
+
+    return { 
+      success: true, 
+      acknowledged, 
+      insertedId: insertedId.toString()
+    };
   }
 
-  const result = await userCollection.insertOne({
-    name,
-    email,
-    password,
-    createdAt: new Date(),
-  });
-
   return {
-    success: true,
-    insertedId: result.insertedId.toString(),
+    success: false,
+    message: "User already exists"
   };
 };

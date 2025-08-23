@@ -1,10 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import { addProduct } from "@/app/actions/addProduct";
+import { useRouter } from "next/navigation";
 
 export default function AddProductPage() {
-  const [form, setForm] = useState({ name: "", description: "", price: "", img: "" });
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    price: "",
+    img: "",
+  });
+  const router = useRouter();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,8 +21,33 @@ export default function AddProductPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await addProduct(form); 
+    try {
+      const result = await addProduct(form);
 
+      if (result.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Product Added!",
+          text: "Your product has been added successfully.",
+        }).then(() => {
+          router.push("/products"); // ✅ redirect after success
+        });
+
+        setForm({ name: "", description: "", price: "", img: "" });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: result.message || "Something went wrong!",
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Failed to add product.",
+      });
+    }
   };
 
   return (
