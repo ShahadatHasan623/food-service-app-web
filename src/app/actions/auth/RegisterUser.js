@@ -21,7 +21,6 @@ export const RegisterUser = async (payload) => {
     const { acknowledged, insertedId } = result;
 
     return { 
-      success: true, 
       acknowledged, 
       insertedId: insertedId.toString()
     };

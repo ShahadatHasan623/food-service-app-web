@@ -8,8 +8,10 @@ export default function RegisterForm() {
     const name =form.name.value;
     const email =form.email.value;
     const password =form.password.value;
+    const image =form.image.value;
     // console.log({name,email,password})
-   await RegisterUser({name,email,password})
+   await RegisterUser({name,email,password,image})
+   form.reset()
   };
 
   const handleGoogleSignUp = () => {
@@ -39,6 +41,16 @@ export default function RegisterForm() {
             required
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             placeholder="Enter your email"
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-1">Image</label>
+          <input
+            type="text"
+            name="image"
+            required
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+            placeholder="image"
           />
         </div>
 
